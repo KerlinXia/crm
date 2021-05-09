@@ -1,8 +1,6 @@
 package cn.kerlin.crm.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * @Description:
@@ -13,6 +11,8 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Department {
     private Long id;
     private String sn;

@@ -13,11 +13,11 @@
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
+  <!--定义自定义变量-->
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <spring.version>5.2.1.RELEASE</spring.version>
   </properties>
+
 
   <dependencies>
     <dependency>
@@ -26,53 +26,104 @@
       <version>1.18.18</version>
       <scope>provided</scope>
     </dependency>
+<!--mybatis相关-->
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis</artifactId>
-      <version>3.4.5</version>
+      <version>3.5.5</version>
     </dependency>
-
+    <!--spring集成mybatis-->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis-spring</artifactId>
+      <version>2.0.2</version>
+    </dependency>
+<!--    数据库驱动-->
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.22</version>
       <scope>runtime</scope>
     </dependency>
-
+<!--打印日志文件-->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
       <version>1.7.25</version>
     </dependency>
 
+    <!--数据库连接池-->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>1.1.19</version>
+    </dependency>
+
+    <!--测试下相关-->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.12</version>
+      <version>4.13.2</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
 
-    <!-- servlet依赖的jar包 -->
+    <!--spring相关-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjweaver</artifactId>
+      <version>1.8.13</version>
+    </dependency>
+
+    <!--项目公用-->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.18</version>
+    </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
-      <version>3.1.0</version>
-      <!--编译和测试阶段使用 打包不使用-->
+      <version>4.0.1</version>
       <scope>provided</scope>
     </dependency>
-
-    <!-- jsp依赖jar包end -->
-    <!--jstl标签依赖的jar包start -->
+    <!--页面标签-->
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>jstl</artifactId>
-      <version>1.2</version>
+      <groupId>org.apache.taglibs</groupId>
+      <artifactId>taglibs-standard-impl</artifactId>
+      <version>1.2.5</version>
     </dependency>
-    <!--jstl标签依赖的jar包end -->
+    <dependency>
+      <groupId>org.apache.taglibs</groupId>
+      <artifactId>taglibs-standard-spec</artifactId>
+      <version>1.2.5</version>
+    </dependency>
   </dependencies>
 
   <build>
     <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.apache.tomcat.maven</groupId>
         <artifactId>tomcat7-maven-plugin</artifactId>
