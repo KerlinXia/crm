@@ -2,12 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8902e12c-bd5e-47be-a5df-0f55eb57b390" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/kerlin/crm/domain/Customer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/kerlin/crm/domain/Department.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/kerlin/crm/domain/Employee.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/kerlin/crm/domain/Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/kerlin/crm/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/kerlin/crm/domain/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -67,7 +79,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1620545743396</updated>
-      <workItem from="1620545746975" duration="515000" />
+      <workItem from="1620545746975" duration="2504000" />
     </task>
     <task id="LOCAL-00001" summary="conmmit test">
       <created>1620545980384</created>
@@ -76,7 +88,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620545980384</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="conmmit test2">
+      <created>1620546427708</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1620546427708</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -84,7 +103,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="conmmit test" />
-    <option name="LAST_COMMIT_MESSAGE" value="conmmit test" />
+    <MESSAGE value="conmmit test2" />
+    <option name="LAST_COMMIT_MESSAGE" value="conmmit test2" />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="74" key="#Project_Structure" timestamp="1620546223972">
@@ -95,21 +115,25 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="574" y="106" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1620546390450" />
-    <state x="385" y="10" key="CommitChangelistDialog2" timestamp="1620545979324">
+    <state x="385" y="10" key="CommitChangelistDialog2" timestamp="1620546426755">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="385" y="10" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1620545979324" />
+    <state x="385" y="10" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1620546426755" />
     <state x="549" y="157" key="FileChooserDialogImpl" timestamp="1620545822659">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="157" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1620545822659" />
-    <state x="643" y="308" width="273" height="207" key="Github.ShareDialog" timestamp="1620546115958">
+    <state x="643" y="308" width="273" height="207" key="Github.ShareDialog" timestamp="1620546542551">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="643" y="308" width="273" height="207" key="Github.ShareDialog/0.0.1536.824@0.0.1536.824" timestamp="1620546115958" />
+    <state x="643" y="308" width="273" height="207" key="Github.ShareDialog/0.0.1536.824@0.0.1536.824" timestamp="1620546542551" />
     <state x="272" y="58" key="SettingsEditor" timestamp="1620545793504">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="272" y="58" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1620545793504" />
+    <state x="361" y="149" key="Vcs.Push.Dialog.v2" timestamp="1620546587531">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="149" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1620546587531" />
   </component>
 </project>

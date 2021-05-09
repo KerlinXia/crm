@@ -5,9 +5,8 @@ package cn.kerlin.crm.domain;
  * @Author:kerlin
  * @Date
  */
-
-public class User {
+public class Department {
     private Long id;
-    private String username;
-    private String password;
+    private String sn;
+    private String name;
 }
