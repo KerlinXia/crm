@@ -26,6 +26,7 @@ public class DepartmentController {
     public String selectAll(Model model){
         List<Department>list = departmentService.selectAllService();
         model.addAttribute("departmentlist",list);
-        return "index.html";
+        System.out.println("执行到这一步");
+        return "redirect:/index.jsp";
     }
 }
