@@ -17,6 +17,7 @@ import java.util.List;
  * @Author:kerlin
  * @Date
  */
+
 @Controller
 @RequestMapping("/department")
 public class DepartmentController {
