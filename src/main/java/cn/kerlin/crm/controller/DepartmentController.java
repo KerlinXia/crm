@@ -24,6 +24,7 @@ public class DepartmentController {
     @Autowired
     private IDepartmentService departmentService;
 
+
     //查询所有
     @RequestMapping("/selectAll")
     @ResponseBody//返回json数据
