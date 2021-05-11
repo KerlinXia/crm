@@ -72,26 +72,41 @@
         
 
         //监听行工具事件
-        table.on('tool(test)', function(obj){
+        table.on('tool(test)', function(obj){ //tool是工具条事件名，test是table原始容器的属性
           var data = obj.data;
-          console.log(obj)
+          //console.log(data)
           //删除操作
           if(obj.event === 'del'){
             layer.confirm('真的删除行么', function(index){
-              url: 'http://localhost:8080/department/selectAll'
-              obj.del();
-              layer.close(index);
+              $.ajax({
+                url:'http://localhost:8080/department/delete?id='+data.id
+                ,method:'POST'
+                ,type:'Delete'
+                ,success:function(d){
+                  obj.del();
+                  layer.msg("删除成功");
+                }
+              })
+              
+              
+        
             });
           } else if(obj.event === 'edit'){
             layer.prompt({
-              formType: 2
-              ,value: data.email
+              formType: 0
+              ,value: data.name
+              ,title: '请输入值'
+              ,area: ['1200px', '550px'] //自定义文本域宽高
             }, function(value, index){
+              var data2=$('#zxr').val()
+                var data3=$('#zxr2').val()
               obj.update({
                 email: value
               });
               layer.close(index);
             });
+            $(".layui-layer-content").append("<br/><input type=\"text\" id= \"zxr\" class=\"layui-input\" placeholder=\"输入注销人\"/>")
+            $(".layui-layer-content").append("<br/><input type=\"text\" id= \"zxr\" class=\"layui-input\" placeholder=\"输入注销人\"/>")
           }
         })
       });
