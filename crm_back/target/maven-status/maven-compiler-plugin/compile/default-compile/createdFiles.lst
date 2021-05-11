@@ -1,0 +1,12 @@
+cn\kerlin\crm\mapper\DepartmentMapper.class
+cn\kerlin\crm\controller\DepartmentController.class
+cn\kerlin\crm\util\JSONResult.class
+cn\kerlin\crm\domain\Employee.class
+cn\kerlin\crm\domain\User.class
+cn\kerlin\crm\domain\Customer.class
+cn\kerlin\crm\domain\Department.class
+cn\kerlin\crm\util\MybatisUtil.class
+cn\kerlin\crm\mapper\EmployeeMapper.class
+cn\kerlin\crm\service\IDepartmentService.class
+cn\kerlin\crm\service\impl\DepartmentImpl.class
+cn\kerlin\crm\domain\Menu.class

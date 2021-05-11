@@ -20,6 +20,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/department")
+@CrossOrigin//解决跨域问题
 public class DepartmentController {
 
     @Autowired
@@ -29,7 +30,6 @@ public class DepartmentController {
     //查询所有
     @RequestMapping("/selectAll")
     @ResponseBody//返回json数据
-    @CrossOrigin//解决跨域问题
     public JSONResult selectAll(){
         List<Department>list = departmentService.selectAllService();
         return  JSONResult.ok(list);
@@ -37,6 +37,7 @@ public class DepartmentController {
 
     //删除信息 返回列表
     @RequestMapping("/delete")
+    @ResponseBody//返回json数据
     public JSONResult delete(Long id){
         if(id!=null){
             departmentService.deleteService(id);
