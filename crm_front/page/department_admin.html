@@ -1,116 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <!-- Layui的核心css文件 -->
-    <link rel="stylesheet" href="../layui/css/layui.css">
-    <link rel="stylesheet" href="../css/1.css">
+    <link rel="stylesheet" href="../layui/css/layui.css" />
+    <link rel="stylesheet" href="../css/1.css" />
     <!-- Layui的核心js文件 -->
     <script src="../layui/layui.js"></script>
-    
-    
+
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-</head>
-<body>
+  </head>
+  <body>
+    <div class="layui-card" style="margin: 25px">
+      <div class="layui-card-header">部门管理</div>
+      <div class="layui-card-body">
+        <button type="button" class="layui-btn" id="add">
+          <i class="layui-icon">&#xe608;</i> 添加
+        </button>
 
-  <div class="layui-card" style="margin: 25px;">
-    <div class="layui-card-header">部门管理</div>
-    <div class="layui-card-body">
-      <button type="button" class="layui-btn" id="add">
-        <i class="layui-icon">&#xe608;</i> 添加
-      </button>
-
-      <table id="demo" lay-filter="test"></table>
+        <table id="demo" lay-filter="test"></table>
+      </div>
     </div>
-  </div>
-  <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-  </script>
 
-    
-              
-    
+    <div id="add-main" style="display: none">
+      <form class="layui-form" lay-filter="add-form" id="add-form" action="">
+        <div class="layui-form-item center">
+          <label class="layui-form-label" style="width: 100px">部门ID</label>
+          <div class="layui-input-block">
+            <input
+              type="disable"
+              hidden
+              name="id"
+              style="width: 240px"
+              lay-verify="required"
+              autocomplete="off"
+              class="layui-input"
+            />
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label" style="width: 100px">部门名称</label>
+          <div class="layui-input-block">
+            <input
+              type="text"
+              name="name"
+              style="width: 240px"
+              lay-verify="required"
+              autocomplete="off"
+              class="layui-input"
+            />
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label" style="width: 100px">部门编号</label>
+          <div class="layui-input-block">
+            <input
+              type="text"
+              name="sn"
+              style="width: 240px"
+              lay-verify="required"
+              autocomplete="off"
+              class="layui-input"
+            />
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <button class="layui-btn" lay-submit lay-filter='save' style="margin-left: 200px;">提交</button>
+        </div>
+      </form>
+    </div>
 
-  <script>
-      layui.use(['table','layer'], function(){
-        var table = layui.table
-        ,layer = layui.layer;
+    <script type="text/html" id="barDemo">
+      <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+      <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"
+        >删除</a
+      >
+    </script>
 
+    <script>
+      layui.use(["table", "layer","form"], function () {
+        var table = layui.table,
+          form = layui.form,
+          $ = layui.jquery,
+          layer = layui.layer;
 
         //第一个实例
         table.render({
-          elem: '#demo'
-          ,height: 312
-          ,parseData: function(res){ //res 即为原始返回的数据
-              return {
-              "code": res.status, //解析接口状态
-              "msg": res.msg, //解析提示文本
-              "count": res.total, //解析数据长度
-              "data": res.data //解析数据列表
-              };
-          }
-          ,response: {
-            statusName: 'code' //规定数据状态的字段名称，默认：code
-            ,statusCode: 200 //规定成功的状态码，默认：0
-            ,msgName: 'msg' //规定状态信息的字段名称，默认：msg
-            ,countName: 'count' //规定数据总数的字段名称，默认：count
-            ,dataName: 'data' //规定数据列表的字段名称，默认：data
-          }
-          ,url: 'http://localhost:8080/department/selectAll' //数据接口
-          ,page: true //开启分页
-          ,cols: [[ //表头
-             {field: 'id', title: '编号', width:250, sort: true, fixed: 'left'}
-            ,{field: 'name', title: '部门名称', width:250}
-            ,{field: 'sn', title: '部门编号', width:250}
-            ,{field: '', title: '操作', width: 250,toolbar: '#barDemo'}
-          ]]
-        })
-        
+          elem: "#demo",
+          height: 312,
+          parseData: function (res) {
+            //res 即为原始返回的数据
+            return {
+              code: res.status, //解析接口状态
+              msg: res.msg, //解析提示文本
+              count: res.total, //解析数据长度
+              data: res.data, //解析数据列表
+            };
+          },
+          response: {
+            statusName: "code", //规定数据状态的字段名称，默认：code
+            statusCode: 200, //规定成功的状态码，默认：0
+            msgName: "msg", //规定状态信息的字段名称，默认：msg
+            countName: "count", //规定数据总数的字段名称，默认：count
+            dataName: "data", //规定数据列表的字段名称，默认：data
+          },
+          url: "http://localhost:8080/department/selectAll", //数据接口
+          page: true, //开启分页
+          cols: [
+            [
+              //表头
+              {
+                field: "id",
+                title: "编号",
+                width: 250,
+                sort: true,
+                fixed: "left",
+              },
+              { field: "name", title: "部门名称", width: 250 },
+              { field: "sn", title: "部门编号", width: 250 },
+              { field: "", title: "操作", width: 250, toolbar: "#barDemo" },
+            ],
+          ],
+        });
 
         //监听行工具事件
-        table.on('tool(test)', function(obj){ //tool是工具条事件名，test是table原始容器的属性
+        table.on("tool(test)", function (obj) {
+          //tool是工具条事件名，test是table原始容器的属性
           var data = obj.data;
           //console.log(data)
           //删除操作
-          if(obj.event === 'del'){
-            layer.confirm('真的删除行么', function(index){
+          if (obj.event === "del") {
+            layer.confirm("真的删除行么", function (index) {
               $.ajax({
-                url:'http://localhost:8080/department/delete?id='+data.id
-                ,method:'POST'
-                ,type:'Delete'
-                ,success:function(d){
+                url: "http://localhost:8080/department/delete?id=" + data.id,
+                method: "POST",
+                type: "Delete",
+                success: function (d) {
                   obj.del();
                   layer.msg("删除成功");
-                }
-              })
-              
-              
-        
-            });
-          } else if(obj.event === 'edit'){
-            layer.prompt({
-              formType: 0
-              ,value: data.name
-              ,title: '请输入值'
-              ,area: ['1200px', '550px'] //自定义文本域宽高
-            }, function(value, index){
-              var data2=$('#zxr').val()
-                var data3=$('#zxr2').val()
-              obj.update({
-                email: value
+                },
               });
-              layer.close(index);
             });
-            $(".layui-layer-content").append("<br/><input type=\"text\" id= \"zxr\" class=\"layui-input\" placeholder=\"输入注销人\"/>")
-            $(".layui-layer-content").append("<br/><input type=\"text\" id= \"zxr\" class=\"layui-input\" placeholder=\"输入注销人\"/>")
+          } else if (obj.event === "edit") { //编辑部门信息
+            layer.open({
+                title: "更改新增部门信息",
+                type: 1,
+                closeBtn: 0,
+                content: $("#add-main"),
+                area: ["400px", "300px"], //自定义文本域宽高
+                //shadeClose:true,
+                success:function(index){}
+            });
           }
-        })
-      });
-  </script>
+        });
 
-</body>
+        //表单赋值
+        form.val("add-form",{ 
+         "id": data.id 
+         ,"name": data.name
+         ,"sn": data.sn
+        });
+
+
+        //提交监听事件
+        form.on('submit(save)',function(data){
+          params = data.field;
+          //submit($,params);
+          $.ajax({
+            url: "http://localhost:8080/department/saveorUpdate?id=" + data.id+"&name="+data.name+"&sn="+data.sn,
+            method: "POST",
+            success: function (d) {
+              layer.msg("成功");
+            },
+          });
+          return false;
+        })
+
+      });
+    </script>
+  </body>
 </html>
