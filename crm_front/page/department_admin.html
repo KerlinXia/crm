@@ -24,8 +24,11 @@
     
 
     <script>
-        layui.use('table', function(){
+        layui.use('table','layer', function(){
           var table = layui.table;
+          var layer = layui.layer;
+
+          layer.msg('hello');
           //第一个实例
           table.render({
             elem: '#demo'

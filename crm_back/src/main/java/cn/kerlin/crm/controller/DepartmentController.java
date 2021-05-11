@@ -37,11 +37,11 @@ public class DepartmentController {
 
     //删除信息 返回列表
     @RequestMapping("/delete")
-    public String delete(Long id){
+    public JSONResult delete(Long id){
         if(id!=null){
             departmentService.deleteService(id);
         }
-        return "redirect:/department/selectAll";
+        return JSONResult.ok();
     }
 
     //新增或者修改信息
