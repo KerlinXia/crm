@@ -5,13 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <!-- Layui的核心css文件 -->
     <link rel="stylesheet" href="../layui/css/layui.css" />
     <link rel="stylesheet" href="../css/1.css" />
     <!-- Layui的核心js文件 -->
     <script src="../layui/layui.js"></script>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   </head>
   <body>
     <div class="layui-card" style="margin: 25px">
@@ -28,21 +27,25 @@
     <div id="add-main" style="display: none">
       <form class="layui-form" lay-filter="add-form" id="add-form" action="">
         <div class="layui-form-item center">
-          <label class="layui-form-label" id="id" style="width: 100px">部门ID</label>
+          <label class="layui-form-label" id="id" style="width: 100px"
+            >部门ID</label
+          >
           <div class="layui-input-block">
             <input
               type="text"
-              disabled="true"
+              disabled="disabled"
               name="id"
               style="width: 240px"
-              lay-verify="required"
+              
               autocomplete="off"
               class="layui-input"
             />
           </div>
         </div>
         <div class="layui-form-item">
-          <label class="layui-form-label" id="name" style="width: 100px">部门名称</label>
+          <label class="layui-form-label" id="name" style="width: 100px"
+            >部门名称</label
+          >
           <div class="layui-input-block">
             <input
               type="text"
@@ -55,7 +58,9 @@
           </div>
         </div>
         <div class="layui-form-item">
-          <label class="layui-form-label" id="sn" style="width: 100px">部门编号</label>
+          <label class="layui-form-label" id="sn" style="width: 100px"
+            >部门编号</label
+          >
           <div class="layui-input-block">
             <input
               type="text"
@@ -88,10 +93,10 @@
     </script>
 
     <script>
-      layui.use(["table", "layer", "form"], function () {
+      layui.use(["table", "layer", "form", "jquery"], function () {
         var table = layui.table,
           form = layui.form,
-          $ = layui.jquery,
+          $ = layui.$,
           layer = layui.layer;
 
         //第一个实例
@@ -152,64 +157,82 @@
               });
             });
           } else if (obj.event === "edit") {
-            addOrupdate(obj.data)
+            addOrupdate(obj.data);
           }
         });
 
-
-
-
         //添加或者修改信息
-        function addOrupdate(data){
-          var data = data
+        function addOrupdate(data) {
+          //var data = data;
           layer.open({
             title: "更改新增部门信息",
             type: 1,
-            closeBtn: 0,
+            closeBtn: 1,
             content: $("#add-main"),
             area: ["400px", "300px"], //自定义文本域宽高
             //shadeClose:true,
-            success: function (layer,index) {
-              if(data){
-                console.log("obj.data:"+data.id)
-                fuzhi(data)
-                form.render()
+            success: function (layer, index) {
+              if (data) {
+                console.log("obj.data:" + data.id);
+                fuzhi(data);
+                tijiao(data);
+              }else{
+                tijiao(data);
               }
             },
           });
         }
 
-        
-
         //表单赋值
-        function fuzhi(data){
-          var data = data
+        function fuzhi(data) {
+          var data = data;
           form.val("add-form", {
             id: data.id,
             name: data.name,
-            sn: data.sn
+            sn: data.sn,
           });
         }
+
+        //关闭页面
+        function CloseWin() {
+          layer.closeAll(); //再执行关闭
+          table.reload("demo");
+        }
+
         
-        //提交监听事件
-        form.on("submit(save)", function (data) {
-          $.ajax({
-            url:
-              "http://localhost:8080/department/saveorUpdate?",
-            data: {
-              id:$("#id").val(),
-              sn:$("#sn").val(),
-              name:$("#name").val()
-            },
-            dataType:'JSON',
-            type: "POST",
-            success: function (d) {
-              layer.msg("成功");
-            },
-          });
-          return false;
+        //执行新增部门功能
+        $("#add").click(function(){
+          $("#add-form")[0].reset();
+          
+          addOrupdate()
         });
+
+        
+
+        //提交监听事件
+        function tijiao(data) {
+          form.on("submit(save)", function (data) {
+            console.log("data:" + JSON.stringify(data.field));
+            $.ajax({
+              url: "http://localhost:8080/department/saveorUpdate?",
+              data: {
+                id: data.field.id,
+                sn: data.field.sn,
+                name: data.field.name,
+              },
+              dataType: "JSON",
+              type: "POST",
+              success: function () {
+                CloseWin();
+              },
+            });
+            return false;
+          });
+        }
       });
+
+
+      
     </script>
   </body>
 </html>
