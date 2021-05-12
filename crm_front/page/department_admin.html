@@ -28,11 +28,11 @@
     <div id="add-main" style="display: none">
       <form class="layui-form" lay-filter="add-form" id="add-form" action="">
         <div class="layui-form-item center">
-          <label class="layui-form-label" style="width: 100px">部门ID</label>
+          <label class="layui-form-label" id="id" style="width: 100px">部门ID</label>
           <div class="layui-input-block">
             <input
-              type="disable"
-              hidden
+              type="text"
+              disabled="true"
               name="id"
               style="width: 240px"
               lay-verify="required"
@@ -42,7 +42,7 @@
           </div>
         </div>
         <div class="layui-form-item">
-          <label class="layui-form-label" style="width: 100px">部门名称</label>
+          <label class="layui-form-label" id="name" style="width: 100px">部门名称</label>
           <div class="layui-input-block">
             <input
               type="text"
@@ -55,7 +55,7 @@
           </div>
         </div>
         <div class="layui-form-item">
-          <label class="layui-form-label" style="width: 100px">部门编号</label>
+          <label class="layui-form-label" id="sn" style="width: 100px">部门编号</label>
           <div class="layui-input-block">
             <input
               type="text"
@@ -68,7 +68,14 @@
           </div>
         </div>
         <div class="layui-form-item">
-          <button class="layui-btn" lay-submit lay-filter='save' style="margin-left: 200px;">提交</button>
+          <button
+            class="layui-btn"
+            lay-submit
+            lay-filter="save"
+            style="margin-left: 200px"
+          >
+            提交
+          </button>
         </div>
       </form>
     </div>
@@ -81,7 +88,7 @@
     </script>
 
     <script>
-      layui.use(["table", "layer","form"], function () {
+      layui.use(["table", "layer", "form"], function () {
         var table = layui.table,
           form = layui.form,
           $ = layui.jquery,
@@ -144,41 +151,64 @@
                 },
               });
             });
-          } else if (obj.event === "edit") { //编辑部门信息
-            layer.open({
-                title: "更改新增部门信息",
-                type: 1,
-                closeBtn: 0,
-                content: $("#add-main"),
-                area: ["400px", "300px"], //自定义文本域宽高
-                //shadeClose:true,
-                success:function(index){}
-            });
+          } else if (obj.event === "edit") {
+            addOrupdate(obj.data)
           }
         });
 
+
+
+
+        //添加或者修改信息
+        function addOrupdate(data){
+          var data = data
+          layer.open({
+            title: "更改新增部门信息",
+            type: 1,
+            closeBtn: 0,
+            content: $("#add-main"),
+            area: ["400px", "300px"], //自定义文本域宽高
+            //shadeClose:true,
+            success: function (layer,index) {
+              if(data){
+                console.log("obj.data:"+data.id)
+                fuzhi(data)
+                form.render()
+              }
+            },
+          });
+        }
+
+        
+
         //表单赋值
-        form.val("add-form",{ 
-         "id": data.id 
-         ,"name": data.name
-         ,"sn": data.sn
-        });
-
-
+        function fuzhi(data){
+          var data = data
+          form.val("add-form", {
+            id: data.id,
+            name: data.name,
+            sn: data.sn
+          });
+        }
+        
         //提交监听事件
-        form.on('submit(save)',function(data){
-          params = data.field;
-          //submit($,params);
+        form.on("submit(save)", function (data) {
           $.ajax({
-            url: "http://localhost:8080/department/saveorUpdate?id=" + data.id+"&name="+data.name+"&sn="+data.sn,
-            method: "POST",
+            url:
+              "http://localhost:8080/department/saveorUpdate?",
+            data: {
+              id:$("#id").val(),
+              sn:$("#sn").val(),
+              name:$("#name").val()
+            },
+            dataType:'JSON',
+            type: "POST",
             success: function (d) {
               layer.msg("成功");
             },
           });
           return false;
-        })
-
+        });
       });
     </script>
   </body>
