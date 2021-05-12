@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>部门信息管理</title>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <!-- Layui的核心css文件 -->
     <link rel="stylesheet" href="../layui/css/layui.css" />
@@ -13,9 +13,9 @@
     <script src="../layui/layui.js"></script>
   </head>
   <body>
-    <div class="layui-card" style="margin: 25px">
+    <div class="layui-card"   style="margin: 25px">
       <div class="layui-card-header">部门管理</div>
-      <div class="layui-card-body">
+      <div class="layui-card-body" style="height: 450px;">
         <button type="button" class="layui-btn" id="add">
           <i class="layui-icon">&#xe608;</i> 添加
         </button>
@@ -93,11 +93,14 @@
     </script>
 
     <script>
-      layui.use(["table", "layer", "form", "jquery"], function () {
+      layui.use(["table", "layer", "form", "jquery","laypage"], function () {
         var table = layui.table,
           form = layui.form,
+          //laypage = layui.laypage,
           $ = layui.$,
           layer = layui.layer;
+
+
 
         //第一个实例
         table.render({
@@ -120,7 +123,7 @@
             dataName: "data", //规定数据列表的字段名称，默认：data
           },
           url: "http://localhost:8080/department/selectAll", //数据接口
-          page: true, //开启分页
+          page: false, //开启分页
           cols: [
             [
               //表头
