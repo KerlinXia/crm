@@ -22,4 +22,12 @@
     <select id="getOne" resultType="cn.kerlin.crm.domain.Department">
         SELECT * FROM department WHERE id=#{id}
     </select>
+
+    <select id="queryCount" resultType="int">
+        SELECT COUNT(id) FROM department
+    </select>
+
+    <select id="queryListByPage" resultType="cn.kerlin.crm.domain.Department">
+        SELECT * FROM department LIMIT #{startIndex}, #{pageSize}
+    </select>
 </mapper>

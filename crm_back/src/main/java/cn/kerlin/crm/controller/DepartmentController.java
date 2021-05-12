@@ -1,6 +1,8 @@
 package cn.kerlin.crm.controller;
 
 import cn.kerlin.crm.domain.Department;
+import cn.kerlin.crm.qo.PageResult;
+import cn.kerlin.crm.qo.QueryObject;
 import cn.kerlin.crm.service.IDepartmentService;
 import cn.kerlin.crm.util.JSONResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +29,21 @@ public class DepartmentController {
     private IDepartmentService departmentService;
 
 
+//    //查询所有
+//    @RequestMapping("/selectAll")
+//    @ResponseBody//返回json数据
+//    public JSONResult selectAll(){
+//        List<Department>list = departmentService.selectAllService();
+//        return  JSONResult.ok(list);
+//    }
     //查询所有
     @RequestMapping("/selectAll")
     @ResponseBody//返回json数据
     public JSONResult selectAll(){
-        List<Department>list = departmentService.selectAllService();
-        return  JSONResult.ok(list);
+        QueryObject qo=new QueryObject();
+        //List<Department>list = departmentService.selectAllService();
+        PageResult<Department> pageResult = departmentService.queryByPage(qo);
+        return  JSONResult.ok(pageResult);
     }
 
     //删除信息 返回列表
@@ -47,7 +58,8 @@ public class DepartmentController {
 
     //新增或者修改信息
     @RequestMapping("/saveorUpdate")
-    public String saveorUpdate(Department department){
+    @ResponseBody//返回json数据
+    public JSONResult saveorUpdate(Department department){
         if (department.getId() == null){
             departmentService.saveService(department);
 
@@ -55,17 +67,7 @@ public class DepartmentController {
             departmentService.updateService(department);
         }
 
-        return "redirect:/department/selectAll";
+        return JSONResult.ok();
     }
 
-    //增加修改页面
-    @RequestMapping("/input")
-    public String input(Long id,Model model){
-        if (id!=null){
-            Department department = departmentService.getOneService(id);
-            model.addAttribute("department",department);
-        }
-
-        return "/department/input";
-    }
 }

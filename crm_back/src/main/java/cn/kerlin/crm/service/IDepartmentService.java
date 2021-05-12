@@ -1,6 +1,8 @@
 package cn.kerlin.crm.service;
 
 import cn.kerlin.crm.domain.Department;
+import cn.kerlin.crm.qo.PageResult;
+import cn.kerlin.crm.qo.QueryObject;
 
 import java.util.List;
 
@@ -19,4 +21,7 @@ public interface IDepartmentService {
 
     //得到单独信息
     Department getOneService(Long id);
+
+    //分页信息
+    PageResult<Department> queryByPage(QueryObject qo);
 }
