@@ -27,4 +27,6 @@ public class Employee {
     private String state;
     private Boolean admin;
     private String role;
+
+    private Department department;
 }

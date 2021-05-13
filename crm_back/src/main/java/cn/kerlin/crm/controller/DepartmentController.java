@@ -29,19 +29,19 @@ public class DepartmentController {
     private IDepartmentService departmentService;
 
 
-//    //查询所有
+
 //    @RequestMapping("/selectAll")
 //    @ResponseBody//返回json数据
 //    public JSONResult selectAll(){
 //        List<Department>list = departmentService.selectAllService();
 //        return  JSONResult.ok(list);
 //    }
+
     //查询所有
     @RequestMapping("/selectAll")
     @ResponseBody//返回json数据
     public JSONResult selectAll(){
         QueryObject qo=new QueryObject();
-        //List<Department>list = departmentService.selectAllService();
         PageResult<Department> pageResult = departmentService.queryByPage(qo);
         return  JSONResult.ok(pageResult);
     }
