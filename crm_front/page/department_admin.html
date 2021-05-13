@@ -96,10 +96,13 @@
       layui.use(["table", "layer", "form", "jquery","laypage"], function () {
         var table = layui.table,
           form = layui.form,
-          //laypage = layui.laypage,
+          laypage = layui.laypage,
           $ = layui.$,
           layer = layui.layer;
 
+
+
+        
 
 
         //第一个实例
@@ -111,8 +114,12 @@
             return {
               code: res.status, //解析接口状态
               msg: res.msg, //解析提示文本
-              count: res.total, //解析数据长度
-              data: res.data, //解析数据列表
+              count: res.data.totalCount, //解析数据长度
+              data: res.data.data, //解析数据列表
+              limit:res.data.pageSize,
+              prve:res.data.prvePage,
+              next:res.data.nextPage
+              
             };
           },
           response: {
@@ -123,7 +130,10 @@
             dataName: "data", //规定数据列表的字段名称，默认：data
           },
           url: "http://localhost:8080/department/selectAll", //数据接口
-          page: false, //开启分页
+          page: {
+            
+            
+          },//开启分页
           cols: [
             [
               //表头
@@ -140,6 +150,8 @@
             ],
           ],
         });
+
+        
 
         //监听行工具事件
         table.on("tool(test)", function (obj) {
