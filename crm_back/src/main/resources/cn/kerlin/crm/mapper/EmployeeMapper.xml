@@ -50,7 +50,7 @@
 
     <select id="queryCount" resultType="int">
         SELECT COUNT(id) FROM employee as b
-        <include refid="bookwhere"/>
+        <include refid="employeewhere"/>
     </select>
 
     <select id="selectById" resultType="cn.kerlin.crm.domain.Employee">
@@ -71,25 +71,25 @@
         <result column="state" property="state"/>
         <result column="admin" property="admin"/>
         <result column="role" property="role"/>
-        <result column="price" property="price"/>
-        <result column="d_id" property="directory.id"/>
-        <result column="d_name" property="directory.name"/>
+        <result column="d_id" property="department.id"/>
+        <result column="d_sn" property="department.sn"/>
+        <result column="d_name" property="department.name"/>
     </resultMap>
     <select id="queryListByPage" resultMap="baseResultMap">
-        SELECT b.id,b.sn,b.name,b.author,b.price,d.id as d_id,d.name as d_name
-        FROM book as b
-        inner join directory as d
-        on b.dirId=d.id
-        <include refid="bookwhere"/>
+        SELECT e.id,e.username,e.realname,e.password,e.tel,e.email,e.deptId,e.inputTime,e.state,e.admin,e.role,d.id as d_id,d.name as d_name,d.sn as d_sn
+        FROM employee as e
+        inner join department as d
+        on e.deptId = d.id
+        <include refid="employeewhere"/>
         LIMIT #{startIndex}, #{pageSize}
     </select>
-    <sql id="bookwhere">
+    <sql id="employeewhere">
         <where>
             <if test="keyword != null and keyword !=''">
-                (b.name LIKE concat('%', #{keyword}, '%') OR b.author LIKE concat('%', #{keyword}, '%'))
+                (e.name LIKE concat('%', #{keyword}, '%'))
             </if>
-            <if test="dirId != null">
-                AND b.dirId = #{dirId}
+            <if test="deptId != null">
+                AND e.deptId = #{deptId}
             </if>
         </where>
     </sql>

@@ -3,4 +3,94 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.kerlin.crm.mapper.EmployeeMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into employee(username,realname,password,tel,email,deptId,inputTime,state,admin,role) value (#{username},#{realname},#{password},#{tel},#{email},#{deptId},#{inputTime},#{state},#{admin},#{role})
+    </insert>
+
+    <delete id="delete">
+        delete from employee where id=#{id}
+    </delete>
+
+    <update id="update">
+        update employee
+        <set>
+            <if test="username !=null and username !=''">
+                username=#{username},
+            </if>
+            <if test="realname !=null and realname !=''">
+                realname=#{realname},
+            </if>
+            <if test="password !=null and password !=''">
+                password=#{password},
+            </if>
+            <if test="tel !=null and tel !=''">
+                tel=#{tel},
+            </if>
+            <if test="email !=null and email !=''">
+                email=#{email},
+            </if>
+            <if test="deptId !=null and deptId !=''">
+                deptId=#{deptId},
+            </if>
+            <if test="inputTime !=null and inputTime !=''">
+                inputTime=#{inputTime},
+            </if>
+            <if test="state !=null and state !=''">
+                state=#{state},
+            </if>
+            <if test="admin !=null and admin !=''">
+                admin=#{admin},
+            </if>
+            <if test="role !=null and role !=''">
+                role=#{role}
+            </if>
+        </set> where id=#{id}
+    </update>
+
+    <select id="queryCount" resultType="int">
+        SELECT COUNT(id) FROM employee as b
+        <include refid="employeewhere"/>
+    </select>
+
+    <select id="selectById" resultType="cn.kerlin.crm.domain.Employee">
+        SELECT * FROM employee where id=#{id}
+    </select>
+    <select id="selectAll" resultType="cn.kerlin.crm.domain.Employee">
+        SELECT * FROM employee
+    </select>
+    <resultMap id="baseResultMap" type="cn.kerlin.crm.domain.Employee">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="realname" property="realname"/>
+        <result column="password" property="password"/>
+        <result column="tel" property="tel"/>
+        <result column="email" property="email"/>
+        <result column="deptId" property="deptId"/>
+        <result column="inputTime" property="inputTime"/>
+        <result column="state" property="state"/>
+        <result column="admin" property="admin"/>
+        <result column="role" property="role"/>
+        <result column="d_id" property="department.id"/>
+        <result column="d_sn" property="department.sn"/>
+        <result column="d_name" property="department.name"/>
+    </resultMap>
+    <select id="queryListByPage" resultMap="baseResultMap">
+        SELECT e.id,e.username,e.realname,e.password,e.tel,e.email,e.deptId,e.inputTime,e.state,e.admin,e.role,d.id as d_id,d.name as d_name,d.sn as d_sn
+        FROM employee as e
+        inner join department as d
+        on e.deptId = d.id
+        <include refid="employeewhere"/>
+        LIMIT #{startIndex}, #{pageSize}
+    </select>
+    <sql id="employeewhere">
+        <where>
+            <if test="keyword != null and keyword !=''">
+                (e.name LIKE concat('%', #{keyword}, '%'))
+            </if>
+            <if test="deptId != null">
+                AND e.deptId = #{deptId}
+            </if>
+        </where>
+    </sql>
 </mapper>

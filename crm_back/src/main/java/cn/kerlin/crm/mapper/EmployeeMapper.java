@@ -45,7 +45,7 @@ public interface EmployeeMapper {
      */
     List<Employee> queryListByPage(EmployeeQueryObject qo);
 
-    //List<Employee> selectAll();
+    List<Employee> selectAll();
 
 
 

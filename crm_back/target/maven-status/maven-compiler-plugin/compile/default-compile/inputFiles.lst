@@ -1,5 +1,6 @@
 D:\gitproject\crm\crm_back\src\main\java\cn\kerlin\crm\service\impl\DepartmentImpl.java
 D:\gitproject\crm\crm_back\src\main\java\cn\kerlin\crm\mapper\EmployeeMapper.java
+D:\gitproject\crm\crm_back\src\main\java\cn\kerlin\crm\qo\EmployeeQueryObject.java
 D:\gitproject\crm\crm_back\src\main\java\cn\kerlin\crm\util\JSONResult.java
 D:\gitproject\crm\crm_back\src\main\java\cn\kerlin\crm\domain\Employee.java
 D:\gitproject\crm\crm_back\src\main\java\cn\kerlin\crm\service\IDepartmentService.java
@@ -10,5 +11,8 @@ D:\gitproject\crm\crm_back\src\main\java\cn\kerlin\crm\qo\QueryObject.java
 D:\gitproject\crm\crm_back\src\main\java\cn\kerlin\crm\controller\DepartmentController.java
 D:\gitproject\crm\crm_back\src\main\java\cn\kerlin\crm\domain\Customer.java
 D:\gitproject\crm\crm_back\src\main\java\cn\kerlin\crm\mapper\DepartmentMapper.java
+D:\gitproject\crm\crm_back\src\main\java\cn\kerlin\crm\service\IEmployeeService.java
 D:\gitproject\crm\crm_back\src\main\java\cn\kerlin\crm\qo\PageResult.java
+D:\gitproject\crm\crm_back\src\main\java\cn\kerlin\crm\service\impl\EmployeeImpl.java
+D:\gitproject\crm\crm_back\src\main\java\cn\kerlin\crm\controller\EmployeeController.java
 D:\gitproject\crm\crm_back\src\main\java\cn\kerlin\crm\domain\User.java

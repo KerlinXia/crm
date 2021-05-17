@@ -10,8 +10,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class EmployeeQueryObject {
+public class EmployeeQueryObject extends QueryObject {
     private String keyword;
-    private Long dirId;
-    private Long bookId;
+    private Long deptId;
 }
